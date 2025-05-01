@@ -7,7 +7,7 @@ public class App {
         
         System.out.println("Welcome to Student Grading System");
         
-        while (true) {
+        while (true) { ss
             System.out.println("\nMenu:");
             System.out.println("1. Add Student");
             System.out.println("2. Add Course");
