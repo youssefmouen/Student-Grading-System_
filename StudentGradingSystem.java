@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 public class StudentGradingSystem {
     private List<Student> students;
     private List<Course> courses;
     private List<Grade> grades;
 
-    public StudentGradingSystem(){
+    public StudentGradingSystem() {
         this.students = new ArrayList<>();
         this.courses = new ArrayList<>();
         this.grades = new ArrayList<>();
@@ -14,32 +15,38 @@ public class StudentGradingSystem {
     public void setstudents(List<Student> students) {
         this.students = students;
     }
+
     public List<Student> getstudents() {
         return students;
     }
+
     public void setcourses(List<Course> courses) {
         this.courses = courses;
     }
+
     public List<Course> getcourses() {
         return courses;
     }
+
     public void setgrades(List<Grade> grades) {
         this.grades = grades;
     }
+
     public List<Grade> getgrades() {
         return grades;
     }
 
-    public void add_student(int ID, String name){
+    public void add_student(int ID, String name) {
         Student newStudent = new Student(ID, name);
         students.add(newStudent);
-        System.out.println("\nYour name: " + name + " ,ID: "+ ID);
+        System.out.println("\nYour name: " + name + " ,ID: " + ID);
     };
 
-    public void add_course(int course_ID, String name, int credit_hours, int grades){
+    public void add_course(int course_ID, String name, int credit_hours, int grades) {
         Course newCourse = new Course(course_ID, name, credit_hours, grades);
         courses.add(newCourse);
-        System.out.println("\nName of the course: " + name + " it's ID: " + course_ID + ", it's credit hours: " + credit_hours );
+        System.out.println(
+                "\nName of the course: " + name + " it's ID: " + course_ID + ", it's credit hours: " + credit_hours);
     }
 
     public void assign_grades(int ID, int course_ID, float grade) {
@@ -58,15 +65,15 @@ public class StudentGradingSystem {
                         break;
                     }
                 }
-                
+
                 if (isEnrolled) {
                     Grade newGrade = new Grade(ID, course_ID, grade);
                     grades.add(newGrade);
-                    
+
                     // Update the grade in the course object
                     for (Course course : courses) {
                         if (course.getCourse_ID() == course_ID) {
-                            course.setgrade((float)grade); // Note: Consider changing to float
+                            course.setgrade((float) grade); // Note: Consider changing to float
                             break;
                         }
                     }
@@ -79,6 +86,7 @@ public class StudentGradingSystem {
         }
         System.out.println("\nStudent not found!");
     }
+
     public double calculateGPA(int ID) {
         for (Student student : students) {
             if (student.getID() == ID) {
@@ -86,7 +94,7 @@ public class StudentGradingSystem {
             }
         }
         System.out.println("\nStudent not found");
-        return -1.0; 
+        return -1.0;
     }
 
     private Grade findGrade(int studentId, int courseId) {
@@ -97,22 +105,22 @@ public class StudentGradingSystem {
         }
         return null;
     }
-    
+
     public String generateReportCard(int ID) {
         for (Student student : students) {
             if (student.getID() == ID) {
                 StringBuilder report = new StringBuilder();
                 report.append("Report Card for ").append(student.getName()).append("\n");
                 report.append("-------------------------\n");
-    
+
                 for (Course course : student.getEnrolledCourses()) {
                     Grade grade = findGrade(ID, course.getCourse_ID());
                     if (grade != null) {
                         report.append(course.getName()).append(": ")
-                              .append(grade.getgrade()).append("\n");
+                                .append(grade.getgrade()).append("\n");
                     }
                 }
-    
+
                 report.append("-------------------------\n");
                 report.append("GPA: ").append(String.format("%.2f", calculateGPA(ID)));
                 return report.toString();
@@ -120,29 +128,29 @@ public class StudentGradingSystem {
         }
         return "Student not found";
     }
-    //public String generateReportCard(int ID){
-    //    for(Student student : students){
-    //        if (student.getID() == ID){
-    //            return student.generateReportCard();
-    //        }
-    //    }
-    //    return "\nStudent not found.";
-    //}
+    // public String generateReportCard(int ID){
+    // for(Student student : students){
+    // if (student.getID() == ID){
+    // return student.generateReportCard();
+    // }
+    // }
+    // return "\nStudent not found.";
+    // }
 
-    public List<Student> filterByStudentName(String name){
+    public List<Student> filterByStudentName(String name) {
         List<Student> result = new ArrayList<>();
-        for(Student student : students){
-            if(student.getName().equals(name)) {
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
                 result.add(student);
             }
         }
-    return result;
+        return result;
     }
 
-    public List<Course> filterByCourseName(String name){
+    public List<Course> filterByCourseName(String name) {
         List<Course> result_c = new ArrayList<>();
-        for(Course course : courses){
-            if(course.getName().equals(name)){
+        for (Course course : courses) {
+            if (course.getName().equals(name)) {
                 result_c.add(course);
             }
         }
@@ -158,7 +166,7 @@ public class StudentGradingSystem {
                 break;
             }
         }
-        
+
         // Find the course
         Course course = null;
         for (Course c : courses) {
@@ -167,7 +175,7 @@ public class StudentGradingSystem {
                 break;
             }
         }
-        
+
         // If both exist, enroll the student
         if (student != null && course != null) {
             student.enroll(course);
@@ -179,17 +187,18 @@ public class StudentGradingSystem {
 
     public String getStudentName(int id) {
         for (Student s : students) {
-            if (s.getID() == id) return s.getName();
-        }
-        return "Unknown";
-    }
-    
-    public String getCourseName(int id) {
-        for (Course c : courses) {
-            if (c.getCourse_ID() == id) return c.getName();
+            if (s.getID() == id)
+                return s.getName();
         }
         return "Unknown";
     }
 
-    
+    public String getCourseName(int id) {
+        for (Course c : courses) {
+            if (c.getCourse_ID() == id)
+                return c.getName();
+        }
+        return "Unknown";
+    }
+
 }

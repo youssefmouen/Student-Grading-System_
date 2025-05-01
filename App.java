@@ -4,10 +4,10 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StudentGradingSystem system = new StudentGradingSystem();
-        
+
         System.out.println("Welcome to Student Grading System");
-        
-        while (true) { ss
+
+        while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Add Student");
             System.out.println("2. Add Course");
@@ -16,10 +16,10 @@ public class App {
             System.out.println("5. Calculate GPA");
             System.out.println("6. Generate Report Card");
             System.out.println("7. Exit");
-            
+
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-            
+
             switch (choice) {
                 case 1:
                     System.out.print("Enter student ID: ");
@@ -29,7 +29,7 @@ public class App {
                     String studentName = scanner.nextLine();
                     system.add_student(studentId, studentName);
                     break;
-                    
+
                 case 2:
                     System.out.print("Enter course ID: ");
                     int courseId = scanner.nextInt();
@@ -48,7 +48,7 @@ public class App {
                     int enrollCourseId = scanner.nextInt();
                     system.enrollStudentInCourse(enrollStudentId, enrollCourseId);
                     break;
-                    
+
                 case 4:
                     System.out.print("Enter student ID: ");
                     int gradeStudentId = scanner.nextInt();
@@ -58,7 +58,7 @@ public class App {
                     float gradeValue = scanner.nextFloat();
                     system.assign_grades(gradeStudentId, gradeCourseId, gradeValue);
                     break;
-                    
+
                 case 5:
                     System.out.print("Enter student ID to calculate GPA: ");
                     int gpaStudentId = scanner.nextInt();
@@ -67,19 +67,19 @@ public class App {
                         System.out.println("GPA: " + gpa);
                     }
                     break;
-                    
+
                 case 6:
                     System.out.print("Enter student ID to generate report card: ");
                     int reportStudentId = scanner.nextInt();
                     String report = system.generateReportCard(reportStudentId);
                     System.out.println(report);
                     break;
-                    
+
                 case 7:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
-                    
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
